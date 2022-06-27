@@ -14,24 +14,20 @@
 							<span @click="editVehicle = true, selectVehicle = item.id">
 								<i class="el-icon-edit-outline"></i>修改
 							</span>
-							
-							<!-- 跳转货运记录 -->
+
+							<!-- 跳转汽车货运记录 -->
 							<span @click="checkRecordByCar()">
 								<i class="el-icon-tickets"></i>运货记录
 							</span>
-
-							<!-- 删除弹框 -->
-							<span @click="visibleDel = true">
-								<el-popover placement="top" width="160" v-model="visibleDel">
-									<p>确定要删除这辆车吗？</p>
-									<div style="text-align: right; margin: 0">
-										<el-button size="mini" type="text" @click="visibleDel = false">取消</el-button>
-										<el-button type="primary" size="mini"
-											@click="visibleDel = false, delData(item.id)">确定</el-button>
-									</div>
-									<a slot="reference" class="el-icon-delete">删除</a>
-								</el-popover>
+							
+							<!-- 确定删除的询问弹框 -->
+							<span>
+								<el-popconfirm confirm-button-text='确定' cancel-button-text='取消' icon="el-icon-info"
+									icon-color="red" title="确定要删除这辆车吗？" @confirm="delData(item.id)" >
+									<a slot="reference">删除</a>
+								</el-popconfirm>
 							</span>
+
 						</template>
 						<a-card-meta :title="'车牌号：' + item.number"
 							:description="'最大容量:\t'+item.capacity+'kg' +'\n车辆证件:\t'+item.card "
@@ -96,13 +92,18 @@
 </template>
 
 <script>
-	import { FindVehicle, AddVehicle, UpdateVehicle, DeleteVehicleById} from "@/api/vehicle"
-	
+	import {
+		FindVehicle,
+		AddVehicle,
+		UpdateVehicle,
+		DeleteVehicleById
+	} from "@/api/vehicle"
+
 	export default {
 		data() {
 			return {
 				visible: false, // 新增车辆
-				visibleDel: false, // 删除气泡
+				// visibleDel: false, // 删除气泡
 				spinning: false, // 加载等待
 				editVehicle: false, // 编辑载具
 				selectVehicle: '', // 选中载具ID
@@ -127,10 +128,10 @@
 		},
 
 		methods: {
-			
+
 			// 查询该货车的货运记录
-			checkRecordByCar(){
-				
+			checkRecordByCar() {
+
 			},
 
 			loadData() {
@@ -154,10 +155,9 @@
 			},
 
 			delData(id) {
+				console.log('确定');
 				console.log(id);
-				console.log(this.visibleDel);
 			},
-
 
 		},
 

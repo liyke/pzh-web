@@ -20,17 +20,16 @@
 									<a-icon type="bar-chart" /> 库存管理
 								</router-link>
 							</span>
-							<!-- 删除仓库弹框 -->
-							<span @click="confirmDelete(item.id)">
-								<el-popover placement="top" width="160" :v-model="delVisible">
-									<p>确定要删除这辆车吗？</p>
-									<div style="text-align: right; margin: 0">
-										<el-button size="mini" type="text" @click="delVisible = false">取消</el-button>
-										<el-button type="primary" size="mini" @click="delWarehouse(item.id)">确定</el-button>
-									</div>
+							
+							
+							<!-- 确定删除的询问弹框 -->
+							<span>
+								<el-popconfirm confirm-button-text='确定' cancel-button-text='取消' icon="el-icon-info"
+									icon-color="red" title="确定要删除该仓库吗？" @confirm="delWarehouse(item.id)" >
 									<a slot="reference">删除</a>
-								</el-popover>
+								</el-popconfirm>
 							</span>
+
 						</template>
 						<a-card-meta :title="'仓库编号: '+item.id"
 							:description="'仓库容量: ' + item.hold+'\n仓库地址: '+item.address" style="white-space: pre">
@@ -79,7 +78,6 @@
 		data() {
 			return {
 				visible: false,
-				delVisible: false,
 				editWarehouse: false, // 编辑仓库弹窗标志
 				opWarehousId: '',	// 要操作的仓库ID
 				form: {
@@ -140,19 +138,12 @@
 			delWarehouse(opWarehousId) {
 				// 删除仓库
 				let temp_id = Number(opWarehousId)
-				console.log(temp_id);
 				deleteWarehouse(temp_id).then((res)=>{
 					this.loadData();
 					this.$message.success("删除成功");
 				})
-				this.delVisible = false;
 			},
 			
-			confirmDelete(id){
-				// 要删除的仓库id
-				this.opWarehousId = id;
-				this.delVisible = true;
-			}
 		},
 
 	}
