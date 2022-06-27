@@ -1,6 +1,5 @@
 <template>
 	<div class="main">
-		<a-spin size="large" :spinning="spinning">
 		<div v-if="current === 0" class="page-content">
 			<el-descriptions class="margin-top" title="公司信息" :column="2" border size="big">
 				<template slot="extra">
@@ -52,6 +51,7 @@
 				</el-descriptions-item>
 			</el-descriptions>
 		</div>
+
 		<div v-if="current === 1" class="page-content">
 			<a-form-model labelAlign="left" :model="data" :label-col="labelCol" :wrapper-col="wrapperCol">
 				<a-form-model-item label="公司名称" required>
@@ -61,7 +61,8 @@
 					<a-input v-model="data.address" allowClear />
 				</a-form-model-item>
 				<a-form-model-item label="创办日期" required>
-					<a-date-picker v-model="data.date" type="date" placeholder="选择日期" style="width: 100%;" valueFormat="YYYY-MM-DD"/>
+					<a-date-picker v-model="data.date" type="date" placeholder="选择日期" style="width: 100%;"
+						valueFormat="YYYY-MM-DD" />
 				</a-form-model-item>
 				<a-form-model-item label="公司负责人" required>
 					<a-input v-model="data.leader" allowClear />
@@ -82,7 +83,6 @@
 				</a-form-model-item>
 			</a-form-model>
 		</div>
-		</a-spin>
 	</div>
 </template>
 
@@ -122,12 +122,14 @@
 				// 初始化提交表单内容为数据库中内容
 				// 切换到表单时自动触发
 				FindCompany({}).then((res) => {
+					// this.data = res.data[0]
+					// this.spinning = false
 					if (res.flag) {
 						setTimeout(() => {
 							this.data = res.data[0]
 							this.spinning = false
-						}, 400)
-					}else{
+						}, 600)
+					} else {
 						this.$message.error("网络故障");
 					}
 				})
