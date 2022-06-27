@@ -1,9 +1,10 @@
 import service from "../utils/request";
 
-export function FindVehicle(){
+export function FindVehicle(data){
     return service({
         url: '/car/get',
-        method: 'post'
+        method: 'post',
+		data:data
     })
 }
 

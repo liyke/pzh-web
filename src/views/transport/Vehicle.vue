@@ -107,19 +107,13 @@
 				editVehicle: false, // 编辑载具
 				selectVehicle: '', // 选中载具ID
 				form: {
+					id: '1',
 					number: '京A0000',
 					type: '货车',
 					capacity: '500',
 					card: 'C1',
 				},
-				data: [{
-					id: "122",
-					// driving: false,
-					type: "货车",
-					number: "渝BAL590",
-					card: "B1",
-					capacity: '50'
-				}, ],
+				data: [],
 				imgList: [
 					require('../../assets/warehouse0.svg'),
 					require('../../assets/warehouse1.svg'),
@@ -143,6 +137,7 @@
 				this.spinning = true;
 				FindVehicle({}).then((res) => {
 					console.log(res)
+					this.data = res.data;
 				})
 				setTimeout(() => {
 					this.spinning = false
