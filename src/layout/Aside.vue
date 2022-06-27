@@ -70,10 +70,6 @@
 								title: '车辆资料',
 								path: '/vehicle'
 							},
-							{
-								title: '驾驶员资料',
-								path: '/driver'
-							},
 						]
 					},
 
@@ -135,6 +131,19 @@
 					// 		{
 					// 			title: '出库分析',
 					// 			path: '/analyze/out'
+					// 		},
+					// 	]
+					// },
+					// {
+					// 	title: '运输信息管理',
+					// 	icon: 'rocket',
+					// 	children: [{
+					// 			title: '车辆资料',
+					// 			path: '/vehicle'
+					// 		},
+					// 		{
+					// 			title: '驾驶员资料',
+					// 			path: '/driver'
 					// 		},
 					// 	]
 					// },

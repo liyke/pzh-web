@@ -1,5 +1,6 @@
 <template>
 	<div class="main">
+		<a-spin size="large" :spinning="spinning">
 		<div v-if="current === 0" class="page-content">
 			<el-descriptions class="margin-top" title="公司信息" :column="2" border size="big">
 				<template slot="extra">
@@ -81,6 +82,7 @@
 				</a-form-model-item>
 			</a-form-model>
 		</div>
+		</a-spin>
 	</div>
 </template>
 
@@ -108,6 +110,7 @@
 				// 描述列表展示数据
 				data: {},
 				loading: false,
+				spinning: false,
 			};
 		},
 		mounted() {
@@ -115,12 +118,17 @@
 		},
 		methods: {
 			initForm() {
+				spinning: true,
 				// 初始化提交表单内容为数据库中内容
 				// 切换到表单时自动触发
 				FindCompany({}).then((res) => {
-					// console.log(res)
 					if (res.flag) {
-						this.data = res.data[0]
+						setTimeout(() => {
+							this.data = res.data[0]
+							this.spinning = false
+						}, 400)
+					}else{
+						this.$message.error("网络故障");
 					}
 				})
 			},
