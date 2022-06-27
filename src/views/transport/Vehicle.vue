@@ -3,7 +3,7 @@
 		<a-spin size="large" :spinning="spinning">
 			<a-row :gutter="20">
 				<a-col :span="8" class="item">
-					<a-card hoverable class="add-item" @click="visible = true">
+					<a-card hoverable class="add-item" @click="createForm()">
 						<a-icon type="plus" />
 						添加车辆
 					</a-card>
@@ -11,7 +11,8 @@
 				<a-col :span="8" v-for="(item, index) in this.data" :key="index" class="item">
 					<a-card hoverable>
 						<template slot="actions" class="ant-card-actions">
-							<span @click="editVehicle = true, selectVehicle = item.id">
+							<!-- 点击弹出修改汽车信息表单 -->
+							<span @click="editForm(item.id)">
 								<i class="el-icon-edit-outline"></i>修改
 							</span>
 
@@ -24,7 +25,9 @@
 							<span>
 								<el-popconfirm confirm-button-text='确定' cancel-button-text='取消' icon="el-icon-info"
 									icon-color="red" title="确定要删除这辆车吗？" @confirm="delData(item.id)" >
-									<a slot="reference">删除</a>
+									<a slot="reference">
+										<i class="el-icon-delete"></i>删除
+									</a>
 								</el-popconfirm>
 							</span>
 
@@ -43,7 +46,7 @@
 		</a-spin>
 
 		<!-- 新增车辆 -->
-		<a-modal title="新增车辆" :visible="visible" @ok="submit" @cancel="visible = false">
+		<a-modal title="新增车辆" :visible="visible" @ok="submitCreate()" @cancel="visible = false">
 			<a-form-model :model="form">
 				<a-form-model-item label="车牌号码">
 					<a-input v-model="form.number" />
@@ -103,16 +106,15 @@
 		data() {
 			return {
 				visible: false, // 新增车辆
-				// visibleDel: false, // 删除气泡
 				spinning: false, // 加载等待
 				editVehicle: false, // 编辑载具
 				selectVehicle: '', // 选中载具ID
 				form: {
-					id: '1',
-					number: '京A0000',
-					type: '货车',
-					capacity: '500',
-					card: 'C1',
+					id: '',
+					number: '',
+					type: '',
+					capacity: '',
+					card: '',
 				},
 				data: [],
 				imgList: [
@@ -137,26 +139,68 @@
 			loadData() {
 				this.spinning = true;
 				FindVehicle({}).then((res) => {
-					console.log(res)
 					this.data = res.data;
 				})
 				setTimeout(() => {
 					this.spinning = false
 				}, 600)
 			},
-
-			submit() {
-
+			
+			// 弹出创建表单 √
+			createForm(){
+				this.form = {};
+				this.visible = true;
 			},
-
-			editData(id) {
-				console.log(id);
+			
+			// 提交创建申请
+			submitCreate() {
+				console.log(this.form);
+				// 创建新汽车
+				AddVehicle(this.form).then(res => {
+					if(res.flag){
+						this.$message.success("创建成功");
+					}else{
+						this.$message.error("网络故障，创建失败");
+					}
+				})
+				// 重新载入数据
+				this.loadData()
+				this.visible = false;
+			},
+			
+			// 弹出修改信息表单 √
+			editForm(carId){
+				this.editVehicle = true, 
+				this.selectVehicle = carId,
+				// 初始化填充
+				FindVehicle({id:carId}).then((res) => {
+					this.form=res.data[0];
+				})
+			},
+			
+			// 提交修改申请 √
+			editData(carId) {
+				this.form.id = carId;
+				UpdateVehicle(this.form).then(res=>{
+					if(res.flag){
+						this.$message.success("修改成功");
+					}else{
+						this.$message.error("网络故障，修改失败");
+					}
+				})
 				this.editVehicle = false;
 			},
-
+			
+			// 删除汽车 √
 			delData(id) {
-				console.log('确定');
-				console.log(id);
+				DeleteVehicleById(id).then(res => {
+					if(res.flag){
+						this.$message.success("删除成功");
+						this.loadData();
+					}else{
+						this.$message.error("网络故障，删除失败");
+					}
+				})
 			},
 
 		},

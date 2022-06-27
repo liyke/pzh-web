@@ -28,7 +28,8 @@ export function UpdateVehicle(data) {
 
 export function DeleteVehicleById(id){
     return service({
-        url: '/car/delete',
-        method: 'get'
+        url: '/car/delete?id='+id,
+        method: 'get',
+		
     })
 }

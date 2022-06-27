@@ -4,7 +4,7 @@
 		<a-spin size="large" :spinning="spinning">
 			<a-row :gutter="20">
 				<a-col :span="8" class="item">
-					<a-card hoverable class="add-item" @click="visible = true">
+					<a-card hoverable class="add-item" @click="visible = true, form = {}">
 						<a-icon type="plus" />
 						添加仓库
 					</a-card>
@@ -12,7 +12,7 @@
 				<a-col :span="8" v-for="(item, index) in this.data" :key="index" class="item">
 					<a-card hoverable>
 						<template slot="actions" class="ant-card-actions">
-							<span @click="editWarehouse = true,opWarehousId = item.id">
+							<span @click="editWarehouse = true,opWarehousId = item.id, form = item">
 								<i class="el-icon-edit-outline"></i>修改
 							</span>
 							<span>
@@ -26,7 +26,9 @@
 							<span>
 								<el-popconfirm confirm-button-text='确定' cancel-button-text='取消' icon="el-icon-info"
 									icon-color="red" title="确定要删除该仓库吗？" @confirm="delWarehouse(item.id)" >
-									<a slot="reference">删除</a>
+									<a slot="reference">
+										<i class="el-icon-delete"></i>删除
+									</a>
 								</el-popconfirm>
 							</span>
 

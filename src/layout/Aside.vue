@@ -46,53 +46,23 @@
 							},
 						]
 					},
+
 					{
-						title: '基础信息管理',
-						icon: 'home',
+						title: '运输调度管理',
+						icon: 'rocket',
 						children: [{
-								title: '商品管理',
-								path: '/commodity'
-							},
-							{
-								title: '来往单位',
-								path: '/company'
-							},
-							{
-								title: '员工管理',
-								path: '/employee'
-							},
-							{
-								title: '仓库管理',
-								path: '/warehouse'
-							},
-						]
+							title: '货物管理',
+							path: '/transportation/goods'
+						}, ]
 					},
 					{
-						title: '销售信息管理',
-						icon: 'pay-circle',
+						title: '仓储管理',
+						icon: 'rocket',
 						children: [{
-								title: '销售开票',
-								path: '/sale/create'
-							},
-							{
-								title: '销售记录',
-								path: '/sale/record'
-							},
-						]
-					},
-					{
-						title: '配送信息管理',
-						icon: 'car',
-						children: [{
-								title: '申请配送',
-								path: '/delivery/create'
-							},
-							{
-								title: '配送列表',
-								path: '/delivery/list'
-							},
-						]
-					},
+							title: '采购物资管理',
+							path: '/warehouse/supply'
+						}, ]
+					}, 
 					{
 						title: '运输信息管理',
 						icon: 'rocket',
@@ -106,36 +76,85 @@
 							},
 						]
 					},
-					{
-						title: '系统决策管理',
-						icon: 'line-chart',
-						children: [{
-								title: '入库分析',
-								path: '/analyze/in'
-							},
-							{
-								title: '出库分析',
-								path: '/analyze/out'
-							},
-						]
-					},
-					{
-						title: '系统信息管理',
-						icon: 'tool',
-						children: [{
-								title: '安全设置',
-								path: '/security'
-							},
-							{
-								title: '操作员管理',
-								path: '/admin'
-							},
-							{
-								title: '权限列表',
-								path: '/role'
-							},
-						]
-					},
+
+// 下面都是原来的 不是自己的项目############################################################################
+					// {
+					// 	title: '基础信息管理',
+					// 	icon: 'home',
+					// 	children: [{
+					// 			title: '商品管理',
+					// 			path: '/commodity'
+					// 		},
+					// 		{
+					// 			title: '来往单位',
+					// 			path: '/company'
+					// 		},
+					// 		{
+					// 			title: '员工管理',
+					// 			path: '/employee'
+					// 		},
+					// 		{
+					// 			title: '仓库管理',
+					// 			path: '/warehouse'
+					// 		},
+					// 	]
+					// },
+					// {
+					// 	title: '销售信息管理',
+					// 	icon: 'pay-circle',
+					// 	children: [{
+					// 			title: '销售开票',
+					// 			path: '/sale/create'
+					// 		},
+					// 		{
+					// 			title: '销售记录',
+					// 			path: '/sale/record'
+					// 		},
+					// 	]
+					// },
+					// {
+					// 	title: '配送信息管理',
+					// 	icon: 'car',
+					// 	children: [{
+					// 			title: '申请配送',
+					// 			path: '/delivery/create'
+					// 		},
+					// 		{
+					// 			title: '配送列表',
+					// 			path: '/delivery/list'
+					// 		},
+					// 	]
+					// },
+					// {
+					// 	title: '系统决策管理',
+					// 	icon: 'line-chart',
+					// 	children: [{
+					// 			title: '入库分析',
+					// 			path: '/analyze/in'
+					// 		},
+					// 		{
+					// 			title: '出库分析',
+					// 			path: '/analyze/out'
+					// 		},
+					// 	]
+					// },
+					// {
+					// 	title: '系统信息管理',
+					// 	icon: 'tool',
+					// 	children: [{
+					// 			title: '安全设置',
+					// 			path: '/security'
+					// 		},
+					// 		{
+					// 			title: '操作员管理',
+					// 			path: '/admin'
+					// 		},
+					// 		{
+					// 			title: '权限列表',
+					// 			path: '/role'
+					// 		},
+					// 	]
+					// },
 				]
 			}
 		},
